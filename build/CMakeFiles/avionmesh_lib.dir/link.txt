@@ -1,0 +1,2 @@
+/usr/bin/ar qc libavionmesh_lib.a CMakeFiles/avionmesh_lib.dir/src/types.cpp.o CMakeFiles/avionmesh_lib.dir/src/commands.cpp.o CMakeFiles/avionmesh_lib.dir/src/parse.cpp.o CMakeFiles/avionmesh_lib.dir/src/avionmesh.cpp.o
+/usr/bin/ranlib libavionmesh_lib.a
