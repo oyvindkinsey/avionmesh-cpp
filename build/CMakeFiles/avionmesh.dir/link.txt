@@ -1,1 +1,0 @@
-/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/avionmesh.dir/link.d CMakeFiles/avionmesh.dir/cli/src/main.cpp.o CMakeFiles/avionmesh.dir/cli/src/ble_bridge.cpp.o CMakeFiles/avionmesh.dir/cli/src/database.cpp.o CMakeFiles/avionmesh.dir/cli/src/cli.cpp.o -o avionmesh  libavionmesh_lib.a recsrmesh/librecsrmesh.a -lpthread

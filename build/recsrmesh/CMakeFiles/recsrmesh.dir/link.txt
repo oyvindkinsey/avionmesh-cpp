@@ -1,2 +1,0 @@
-/usr/bin/ar qc librecsrmesh.a CMakeFiles/recsrmesh.dir/src/crypto.cpp.o CMakeFiles/recsrmesh.dir/src/csrmesh.cpp.o CMakeFiles/recsrmesh.dir/src/masp.cpp.o CMakeFiles/recsrmesh.dir/src/mcp.cpp.o CMakeFiles/recsrmesh.dir/src/mcp_crypto.cpp.o CMakeFiles/recsrmesh.dir/src/mtl.cpp.o CMakeFiles/recsrmesh.dir/src/protocol.cpp.o
-/usr/bin/ranlib librecsrmesh.a
