@@ -11,10 +11,20 @@ option(USE_SIMPLEBLE "Enable SimpleBLE support" ON)
 find_package(PkgConfig)
 
 # SimpleBLE (optional - can use stub implementation)
+set(SIMPLEBLE_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external/simpleble CACHE PATH "Path to SimpleBLE source")
 if(USE_SIMPLEBLE)
-    pkg_check_modules(SIMPLEBLE simpleble)
-    if(SIMPLEBLE_FOUND)
-        set(SIMPLEBLE_SUPPORT TRUE)
+    # Try pkg-config first (system install)
+    pkg_check_modules(SIMPLEBLE_PKG simpleble QUIET)
+    if(SIMPLEBLE_PKG_FOUND)
+        set(SIMPLEBLE_FOUND TRUE)
+        set(SIMPLEBLE_INCLUDE_DIRS ${SIMPLEBLE_PKG_INCLUDE_DIRS})
+        set(SIMPLEBLE_LIBRARIES ${SIMPLEBLE_PKG_LIBRARIES})
+    elseif(EXISTS ${SIMPLEBLE_SRC_DIR}/simpleble/CMakeLists.txt)
+        # Local source build
+        add_subdirectory(${SIMPLEBLE_SRC_DIR}/simpleble ${CMAKE_CURRENT_BINARY_DIR}/simpleble)
+        set(SIMPLEBLE_FOUND TRUE)
+        set(SIMPLEBLE_INCLUDE_DIRS ${SIMPLEBLE_SRC_DIR}/simpleble/include ${SIMPLEBLE_SRC_DIR}/dependencies/external)
+        set(SIMPLEBLE_LIBRARIES simpleble)
     endif()
 endif()
 
@@ -34,8 +44,8 @@ find_package(Threads REQUIRED)
 # Include directories
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-# recsrmesh library - include as subdirectory
-set(RECSRMESH_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../recsrmesh-cpp CACHE PATH "Path to recsrmesh-cpp")
+# recsrmesh library - bundled as submodule
+set(RECSRMESH_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external/recsrmesh CACHE PATH "Path to recsrmesh-cpp")
 add_subdirectory(${RECSRMESH_SRC_DIR} ${CMAKE_CURRENT_BINARY_DIR}/recsrmesh)
 
 # avionmesh library
@@ -49,7 +59,9 @@ target_include_directories(avionmesh_lib PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${RECSRMESH_SRC_DIR}/include
 )
-target_link_libraries(avionmesh_lib PUBLIC recsrmesh ${MBEDTLS_LIBRARIES} Threads::Threads)
+# MbedTLS is found by recsrmesh; link imported targets explicitly
+find_package(MbedTLS REQUIRED)
+target_link_libraries(avionmesh_lib PUBLIC recsrmesh MbedTLS::mbedcrypto MbedTLS::mbedtls MbedTLS::mbedx509 Threads::Threads)
 
 # CLI executable
 add_executable(avionmesh
@@ -66,20 +78,15 @@ target_include_directories(avionmesh PRIVATE
 if(SIMPLEBLE_FOUND)
     target_include_directories(avionmesh PRIVATE ${SIMPLEBLE_INCLUDE_DIRS})
     target_compile_definitions(avionmesh PRIVATE USE_SIMPLEBLE=1)
-    target_link_libraries(avionmesh ${SIMPLEBLE_LIBRARIES})
+    target_link_libraries(avionmesh PRIVATE ${SIMPLEBLE_LIBRARIES})
 endif()
 
-target_link_libraries(avionmesh
+target_link_libraries(avionmesh PRIVATE
     avionmesh_lib
     recsrmesh
     nlohmann_json::nlohmann_json
     Threads::Threads
 )
-
-# Platform-specific libraries
-if(UNIX AND NOT APPLE)
-    target_link_libraries(avionmesh pthread)
-endif()
 
 # Installation
 install(TARGETS avionmesh DESTINATION bin)
