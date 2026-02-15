@@ -38,10 +38,14 @@ struct Command {
 void cmd_brightness(uint16_t target_id, uint8_t brightness, Command &cmd);
 void cmd_color_temp(uint16_t target_id, uint16_t kelvin, Command &cmd);
 void cmd_read_all_dimming(Command &cmd);
+void cmd_read_all_color(Command &cmd);
 void cmd_set_date(uint16_t year, uint8_t month, uint8_t day, Command &cmd);
 void cmd_set_time(uint8_t hour, uint8_t minute, uint8_t second, Command &cmd);
 void cmd_ping(uint16_t target_id, Command &cmd);
 void cmd_insert_group(uint16_t device_id, uint16_t group_id, Command &cmd);
 void cmd_delete_group(uint16_t device_id, uint16_t group_id, Command &cmd);
+
+void cmd_create(uint16_t target_id, Verb verb, Noun noun,
+                const uint8_t *value, size_t value_len, Command &cmd);
 
 }  // namespace avionmesh
