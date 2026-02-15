@@ -11,9 +11,6 @@
             "-Iinclude",
             "-Iexternal/recsrmesh/include"
         ],
-        "srcFilter": [
-            "+<src/>",
-            "+<external/recsrmesh/src/>"
-        ]
+        "srcFilter": "+<src/> +<external/recsrmesh/src/>"
     }
 }
