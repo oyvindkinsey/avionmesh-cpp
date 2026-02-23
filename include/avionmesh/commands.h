@@ -16,17 +16,18 @@ enum class Verb : uint8_t {
 };
 
 enum class Noun : uint8_t {
-    Groups        = 3,
-    Schedule      = 7,
-    Countdown     = 9,
-    Dimming       = 10,
-    Date          = 21,
-    Time          = 22,
-    FadeTime      = 25,
-    Association   = 27,
+    Groups          = 3,
+    Schedule        = 7,
+    Countdown       = 9,
+    Dimming         = 10,
+    Date            = 21,
+    Time            = 22,
+    FadeTime        = 25,
+    Association     = 27,
+    Color           = 29,
+    Config          = 30,
     FirmwareVersion = 40,
-    Color         = 29,
-    Config        = 30,
+    None            = 255,
 };
 
 struct Command {

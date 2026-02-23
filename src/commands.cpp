@@ -77,7 +77,7 @@ void cmd_set_time(uint8_t hour, uint8_t minute, uint8_t second, Command &cmd)
 void cmd_ping(uint16_t target_id, Command &cmd)
 {
     uint8_t value[3] = {0x01, 0, 0};
-    create_packet(target_id, Verb::Ping, Noun::Dimming, value, 3, cmd);
+    create_packet(target_id, Verb::Ping, Noun::None, value, 3, cmd);
 }
 
 void cmd_insert_group(uint16_t device_id, uint16_t group_id, Command &cmd)
