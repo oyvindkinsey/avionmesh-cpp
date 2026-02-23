@@ -1,6 +1,8 @@
 # avionmesh-cpp
 
-A C++20 library implementing the Avi-on mesh lighting protocol for ESP32 (ESP-IDF / PlatformIO), built on top of [recsrmesh-cpp](https://github.com/oyvindkinsey/recsrmesh-cpp).
+A C++20 library implementing the Avi-on mesh lighting protocol, built on top of [recsrmesh-cpp](https://github.com/oyvindkinsey/recsrmesh-cpp).
+
+Platform independence is inherited from recsrmesh-cpp — no BLE stack or hardware dependencies are introduced at this layer.
 
 The equivalent Python library is [avionmesh](https://github.com/oyvindkinsey/avionmesh).
 
