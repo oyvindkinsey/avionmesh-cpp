@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-10-18
+
+### Changed
+
+- Bump recsrmesh-cpp to v1.1.1; add micro-ecc include path for converted IDF builds.
+
 ## [1.1.0] - 2026-10-18
 
 ### Changed
