@@ -62,6 +62,7 @@ target_include_directories(avionmesh_lib PUBLIC
     ${RECSRMESH_SRC_DIR}/include
 )
 # MbedTLS is found by recsrmesh; link imported targets explicitly
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 find_package(MbedTLS REQUIRED)
 target_link_libraries(avionmesh_lib PUBLIC recsrmesh MbedTLS::mbedcrypto MbedTLS::mbedtls MbedTLS::mbedx509 Threads::Threads)
 
