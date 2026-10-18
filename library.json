@@ -1,6 +1,6 @@
 {
     "name": "avionmesh",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Avi-on Bluetooth mesh light command library (C++20)",
     "keywords": "ble,mesh,avion,csrmesh,light",
     "frameworks": "espidf",
