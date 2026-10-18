@@ -55,6 +55,8 @@ add_library(avionmesh_lib STATIC
     src/parse.cpp
     src/avionmesh.cpp
 )
+target_compile_options(avionmesh_lib PRIVATE -Wall -Wextra)
+
 target_include_directories(avionmesh_lib PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${RECSRMESH_SRC_DIR}/include
