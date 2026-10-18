@@ -9,7 +9,8 @@
         "flags": [
             "-std=gnu++20",
             "-Iinclude",
-            "-Iexternal/recsrmesh/include"
+            "-Iexternal/recsrmesh/include",
+            "-Iexternal/recsrmesh/external/micro-ecc"
         ],
         "srcDir": ".",
         "srcFilter": "+<src/> +<external/recsrmesh/src/>"
