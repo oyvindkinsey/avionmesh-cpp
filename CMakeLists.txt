@@ -66,7 +66,8 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 find_package(MbedTLS REQUIRED)
 target_link_libraries(avionmesh_lib PUBLIC recsrmesh MbedTLS::mbedcrypto MbedTLS::mbedtls MbedTLS::mbedx509 Threads::Threads)
 
-# CLI executable
+# CLI executable (cli/ is not tracked in this repo; build only if present)
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/cli/src/main.cpp)
 add_executable(avionmesh
     cli/src/main.cpp
     cli/src/ble_bridge.cpp
@@ -90,6 +91,9 @@ target_link_libraries(avionmesh PRIVATE
     nlohmann_json::nlohmann_json
     Threads::Threads
 )
+endif()
 
 # Installation
-install(TARGETS avionmesh DESTINATION bin)
+if(TARGET avionmesh)
+    install(TARGETS avionmesh DESTINATION bin)
+endif()
