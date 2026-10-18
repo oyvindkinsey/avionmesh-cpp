@@ -7,10 +7,8 @@ namespace avionmesh {
 
 static constexpr uint8_t MODEL_OPCODE = 0x73;
 
-bool parse_response(uint16_t mcp_source, uint16_t crypto_source,
-                    uint8_t opcode, const uint8_t *payload,
-                    size_t payload_len, Status &status)
-{
+bool parse_response(uint16_t mcp_source, uint16_t crypto_source, uint8_t opcode,
+                    const uint8_t *payload, size_t payload_len, Status &status) {
     if (opcode != MODEL_OPCODE)
         return false;
     if (payload_len < 2)
